@@ -1,0 +1,81 @@
+   10 REM DANRG75 KS2 SPELLING TEST
+   20 MODE 7:VDU23;11;0;0;0;
+   30 PRINTTAB(0,1);CHR$(132);CHR$(157);CHR$(131);CHR$(141);"        READ, COVER, TYPE!"
+   40 PRINTTAB(0,2);CHR$(132);CHR$(157);CHR$(131);CHR$(141);"        READ, COVER, TYPE!"
+   50 VDU 28,1,20,32,4
+   60 DIM word$(217)
+   70 FOR x=1 TO 217
+   80 READ word$(x)
+   90 NEXT x
+  100 right=0
+  110 FOR x=1 TO 10
+  120 r=RND(160)
+  
+  121 REM PROCread
+  122 CLS
+  130 PRINTTAB(0,0) "READ:";CHR$(RND(6)+129);word$(r)
+  140 PRINTTAB(0,10) CHR$(132);CHR$(157);CHR$(131);"     press <SPACE> to cover"
+  150 REPEAT UNTIL GET=32
+  155 REM ENDPROC
+  160 VDU 12
+  
+  165 REM PROCtype
+  170 PRINT "TYPE";
+  180 INPUT answer$:
+  181 PRINT " ";
+  190 IF answer$=word$(r) THEN PROCyes ELSE PROCno
+  200 NEXT x
+  210 PRINT "You got ";right; "/ 10 correct"
+  220 END
+  
+  230 DEF PROCyes
+  231 CLS
+  240 VDU 12
+  250 PRINTTAB(0,0) "Well done!";CHR$(RND(6)+129); word$(r);CHR$(135);"is right!"
+  260 right=right+1
+  270 PRINTTAB(0,10) CHR$(132);CHR$(157);CHR$(131);"        press <SPACE> "
+  280 REPEAT UNTIL GET=32
+  290 ENDPROC
+  
+  300 DEF PROCno
+  310 PRINT "No:";CHR$(RND(6)+129); answer$;CHR$(135);"is";CHR$(RND(6)+129);word$(r)
+  312 PRINTTAB(0,10) CHR$(132);CHR$(157);CHR$(131);"        press <SPACE> "
+  313 REPEAT UNTIL GET=32
+  314 REM: Store word$(r) in $wrong array
+  320 ENDPROC
+  
+  330 REM *** Y3+4, 110 words ***
+  340 DATA accident, accidentally, actually, address, answer, appear, arrive, 
+  350 DATA believe, bicycle, breath, breathe, build, busy, business, calendar, 
+  360 DATA caught,  centre, century, certain, circle, complete, consider,  
+  370 DATA continue, decide, describe, different, difficult, disappear, early, 
+  380 DATA earth, eight, eighth, enough, exercise, experience, experiment,  
+  390 DATA extreme, famous, favourite, February, forward, forwards, fruit, 
+  400 DATA grammar, group, guard, guide, heard, heart, height, history, imagine, 
+  410 DATA increase, important, interest, island,  knowledge, learn, length, 
+  420 DATA library, material, medicine, mention, minute, natural, naughty, 
+  430 DATA notice, occasion, occasionally, often, opposite, ordinary,  
+  440 DATA particular, peculiar, perhaps, popular, position, possess, 
+  450 DATA possession, possible, potatoes, pressure, probably, promise, purpose,  
+  460 DATA quarter, question, recent, regular, reign, remember, sentence, 
+  470 DATA separate, special, straight, strange, strength, suppose, surprise, 
+  480 DATA woman, women,
+  490 REM *** Y5+6, 107 words ***
+  500 DATA accommodate, accompany, according, achieve, aggressive,
+  510 DATA amateur, ancient, apparent, appreciate, attached, available,
+  520 DATA average, awkward, bargain, bruise, category, cemetery,
+  530 DATA committee, communicate, community, competition, conscience,
+  540 DATA conscious, controversy, convenience, correspond, criticise,
+  550 DATA critic, curiosity, definite, desperate, determined, develop,
+  560 DATA dictionary, disastrous, embarrass, environment, equip, equipped,
+  570 DATA equipment, especially, exaggerate, excellent, existence, explanation,
+  580 DATA familiar, foreign, forty, frequently, government, guarantee, harass,
+  590 DATA hindrance, identity, immediate, immediately, individual, interfere,
+  600 DATA interrupt, language, leisure, lightning, marvellous, mischievous, 
+  610 DATA muscle, necessary, neighbour, nuisance, occupy, occur, opportunity, 
+  620 DATA parliament, persuade, physical, prejudice, privilege, profession, 
+  630 DATA programme, pronunciation, queue, recognise, recommend, relevant,
+  640 DATA restaurant, rhyme, rhythm, sacrifice, secretary, shoulder, 
+  650 DATA signature, sincere, sincerely, soldier, stomach, sufficient, suggest,
+  660 DATA symbol, system, temperature, thorough, twelfth, variety, vegetable, 
+  670 DATA vehicle, yacht

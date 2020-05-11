@@ -1,0 +1,41 @@
+DANRG75 KS2 Spelling Test for the BBC Micro
+-------------------------------------------
+
+A simple spelling test for the BBC Micro based on the National Curriculum KS2 (Junior School) wordlists that cover "tricky words" that follow non-standard patterns.
+
+The programme follows the familiar Read, Cover, Write methodology, and is an un-timed test (often the challenge of finding the right letter on the keyboard is harder than the actual spelling of the word) of ten words.
+
+FILES:
+------
+
+README - this file
+spelling-test - the BBC Basic source code
+spell.dsd - A BBC disk image containing the Basic programme and a !BOOT file
+
+
+spell.dsd should boot normally with shift-break else once the disk is loaded into the BBC, type:
+
+CH."TEST"
+
+TO-DO:
+------
+
+While the programme does work, it could do with some improvement:
+
+Fail silently - currently the programme repeats input error with a 'no' this should instead just record the end results.
+
+Results - currently just remarks X/10 correct, should produce list of words input incorrectly with encouraging remarks to practice more.
+
+Test again - the end of the programme is inelegant and dumps the user back at basic prompt >
+
+Select word list - Years 3 & 4 only need the first 110 words, whereas Y 5 & 6 are expected the whole 217 - user should be able to choose.
+
+
+Sources:
+
+
+Original wordlists:
+https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/335186/PRIMARY_national_curriculum_-_English_220714.pdf
+
+
+- DANRG75
