@@ -1,9 +1,10 @@
-DANRG75 KS2 Spelling Test for the BBC Micro
--------------------------------------------
+READ, COVER, TYPE! V2.1
+-----------------------
 
-A simple spelling test for the BBC Micro based on the National Curriculum KS2 (Junior School) wordlists that cover "tricky words" that follow non-standard patterns.
+A simple spelling test for the BBC Micro based on the National Curriculum for England KS2 (Junior School) wordlists that cover words that do not follow standard patterns of written English.
 
 The programme follows the familiar Read, Cover, Write methodology, and is an un-timed test (often the challenge of finding the right letter on the keyboard is harder than the actual spelling of the word) of ten words.
+
 
 FILES:
 ------
@@ -17,22 +18,82 @@ spell.dsd should boot normally with shift-break else once the disk is loaded int
 
 CH."TEST"
 
-TO-DO:
+
+WHAT IT DOES
+------------
+
+READ, COVER, TYPE! Introduces words from the National Curriculum Key Stage 2 Upper and Lower spelling lists, which the user can choose by pressing <1> or <2> to begin.
+
+A word is then randomly chosen by the computer from the appropriate word list, and displayed on the screen for the user to READ. The user can be encouraged to READ the word aloud, or vocally sound out the letters if it helps, or just read the word in their head. This will largely depend on the confidence and ability of the user.  Once ready the user then presses the <space> key to hide, or COVER, the word. 
+
+The user is then prompted to TYPE the word, and press <return>. The computer checks the spelling against the database of words, if the spelling is correct, a "well done" message is displayed, if an incorrect spelling is entered a message showing the correct spelling is shown. The user can then press <space> to go to the next word.
+
+After 8 words have been shown and typed, the user is given a list of words that include any incorrect spellings along with some 'new' words randomly selected from the appropriate word-list. The user is asked to write these down as writing practice, and can be used as a basis for traditional pen and paper Read, Cover, Write exercises.
+
+LEARNING OUTCOMES
+-----------------
+
+Spelling words, typing and  
+
+THEORY
 ------
 
-While the programme does work, it could do with some improvement:
+The programme is written around establishing a GROWTH MINDSET. When errors are made the progam gives positive reinforcement of the correct answer, and when correct input gives encourages the user to expand their knowledge. 
 
-Fail silently - currently the programme repeats input error with a 'no' this should instead just record the end results.
+The word-list to copy down is presented as "try practicing these" rather than "these are what you got wrong". When the user gets a spelling correct the word-list to copy down adds words that were not in the test to encourage further growth. The word-lists are not presented to the user as a closed set of data which must be learned, and when learned the task is finished. Instead learning is established as an ever-evolving and never-ending process that involves repetition, and mastery is established as "I know this", rather than "You have finished this".
 
-Results - currently just remarks X/10 correct, should produce list of words input incorrectly with encouraging remarks to practice more.
+The programme encourages OVERLEARNING. This is a technique of continuing to repeat previously mastered skills to make sure they stick - a Premier League Footballer doesn't just kick a ball once and go home! The random selection of words given in the READ and TYPE section mixes words that may have already been mastered alongside new and unfamiliar words. The Year 5 and 6 option also includes the full set of Year 1 and 2 words, to reinforce previous learning. 
 
-Test again - the end of the programme is inelegant and dumps the user back at basic prompt >
+READ COVER TYPE is MULTIMODAL, and designed to work across multiple learning preferences and encourage learning through: 
+	VISUAL  - using different colours to focus and shift attention to words
+			- clean and consistent design language that emphasises rather than 	
+			  distracts from the learning
+			- users should be encouraged to use different colours for each word 	
+			  when writing down words in their exercise book. 
+	AUDIO 	- reading the words aloud 
+			- sounding out letters
+			- sounding out syllables
+			- verbal assistance from instructor
+	KINASTHETIC - typing finding and locating letters
+				- handwriting engages muscle memory
+	READ/WRITE - this should be largely self evident!
+			- 
+			- encourage users to find words in dictionary and
 
-Select word list - Years 3 & 4 only need the first 110 words, whereas Y 5 & 6 are expected the whole 217 - user should be able to choose.
+Users should be encouraged to use different colours for each word when writing down words in their exercise book. 
+
+As the user becomes familliar with the word-list trhough READ, COVER, TYPE! their own sets of will emerge. Focus on the un-learned words as part of the physical media.
 
 
-Sources:
 
+TO-DO
+-----
+
+- rename file / project from TEST to something more friendly
+- use different (random) "well done!" phrases.
+- use score out of eight to determine end phrasing?
+- PDF exercise book / instructors guide
+
+
+STRUCTURE
+---------
+
+PROCintro
+
+LOOP (x8):
+
+PROCread
+PROCtype
+PROCyes
+PROCno
+
+END LOOP
+
+PROCwrite, book.
+
+
+SOURCES
+-------
 
 Original wordlists:
 https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/335186/PRIMARY_national_curriculum_-_English_220714.pdf

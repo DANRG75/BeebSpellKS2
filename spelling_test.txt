@@ -1,0 +1,150 @@
+   10 REM *****************************
+   20 REM * KS2 READ, COVER, TYPE!    *
+   30 REM * DANRG75                   *
+   40 REM * V2.1 05/20                *
+   50 REM *****************************
+   60 MODE 7:VDU23;11;0;0;0;
+   70 x=0
+   80 word$ =""
+   90 rightword$ =""
+  100 PROChead
+  110 PROCintro
+  120 DIM word$(uselist)
+  130 DIM rightword$(8)
+  140 DIM wrongword$(8)
+  150 right=0
+  160 wrong=0
+  170 x=0
+  180 FOR x=1 TO uselist
+  190 READ word$(x)
+  200 NEXT x
+  210 x=0
+  220 FOR x=1 TO 8
+  230 r=RND(uselist)
+  240 PROCread
+  250 PROCtype
+  260 NEXT x
+  270 PROCfinish
+  280 END
+  290 REM *****************************
+  300 DEF PROChead
+  310 PRINTTAB(0,1);CHR$(132);CHR$(157);CHR$(131);CHR$(141);"        READ, COVER, TYPE!"
+  320 PRINTTAB(0,2);CHR$(132);CHR$(157);CHR$(131);CHR$(141);"        READ, COVER, TYPE!"
+  330 VDU 28,0,24,36,4
+  340 ENDPROC
+  350 REM *****************************
+  360 DEF PROCintro
+  370 CLS
+  380 VDU 12
+  390 PRINTCHR$(131);"Welcome to READ, COVER, TYPE!" 
+  400 PRINTCHR$(131);"                                    ";
+  410 PRINTCHR$(131);"You will be shown a word to read,   "; 
+  420 PRINTCHR$(131);"pay careful attention to each letter";
+  430 PRINTCHR$(131);"and Press <SPACE> when you are ready";
+  440 PRINTCHR$(131);"                                    ";
+  450 PRINTCHR$(131);"Then type the correct spelling and  ";
+  460 PRINTCHR$(131);"press <RETURN>.                     ";
+  470 PRINTCHR$(131);"                                    ";
+  480 PRINTCHR$(131);"After 8 words you will get a list of";
+  490 PRINTCHR$(131);"words to write down and practice!   ";
+  500 PRINTCHR$(131);"                                    ";
+  510 PRINTCHR$(131);"All the spellings are in lower-case,"; 
+  520 PRINTCHR$(131);"so please make sure <Caps Lock> and "; 
+  530 PRINTCHR$(131);"<Shift Lock> are off!               "; 
+  540 PRINTCHR$(131);"                                    "; 
+  550 PRINT          "       For Years 3 and 4 press <1>  " 
+  560 PRINT          "       For Years 5 and 6 press <2>  "
+  570 PRINTTAB(0,19) CHR$(132);CHR$(157);CHR$(131);"     Press <1> or <2> to begin."
+  580 L$ = GET$
+  590 IF L$="1" uselist=(105) ELSE IF L$="2" uselist=(206) ELSE PROCintro
+  600 ENDPROC 
+  610 REM *****************************
+  620 DEF PROCread
+  630 CLS
+  640 PRINTTAB(0,0) " READ:";CHR$(RND(6)+128);word$(r)
+  650 PRINTTAB(0,19) CHR$(132);CHR$(157);CHR$(131);"Read, then press <SPACE> to cover.";
+  660 REPEAT UNTIL GET=32
+  670 ENDPROC
+  680 REM *****************************
+  690 DEF PROCtype
+  700 VDU 12
+  710 PRINTTAB(0,19);CHR$(132);CHR$(157);CHR$(131);" Type the word and press <RETURN>. ";
+  720 PRINTTAB(0,0) " TYPE ";
+  730 INPUT answer$
+  740 IF answer$=word$(r) THEN PROCyes ELSE PROCno
+  750 ENDPROC
+  760 REM *****************************
+  770 DEF PROCyes
+  780 CLS
+  790 VDU 12
+  800 PRINTTAB(0,0) " Well done!";CHR$(RND(6)+128); word$(r);CHR$(135);"is right!"
+  810 right=right+1
+  820 rightword$(right)= word$(r)
+  830 PRINTTAB(0,19) CHR$(132);CHR$(157);CHR$(131);"  Press <SPACE> for the next word.";
+  840 REPEAT UNTIL GET=32
+  850 ENDPROC
+  860 REM *****************************
+  870 DEF PROCno
+  880 CLS
+  890 VDU 12
+  900 PRINTTAB(0,0) " The correct spelling is";CHR$(RND(6)+128);word$(r)
+  910 wrong=wrong+1
+  920 wrongword$(wrong)= word$(r)
+  930 PRINTTAB(0,19) CHR$(132);CHR$(157);CHR$(131);"  Press <SPACE> for the next word.";
+  940 REPEAT UNTIL GET=32
+  950 ENDPROC
+  960 REM *****************************
+  970 DEF PROCfinish
+  980 CLS
+  990 VDU 12
+ 1000 PRINT CHR$(131);"Well done! You got";CHR$(135);right;"/8";CHR$(131);"correct"
+ 1010 PRINTCHR$(131);"                                    ";
+ 1020 PRINTCHR$(131);"Here are some words to practice     ";
+ 1030 PRINTCHR$(131);"some might be old, some might be new";
+ 1040 PRINTCHR$(131);"                                    ";
+ 1050 FOR x=1 TO 8
+ 1060 IF wrongword$(x) ="" THEN PRINT "  ";CHR$(RND(6)+128);word$(RND(uselist)) ELSE PRINT "  ";CHR$(RND(6)+128);wrongword$(x)
+ 1070 NEXT x
+ 1080 PRINTCHR$(131);"                                    ";
+ 1090 PRINT CHR$(131);"Write these in your exercise book."
+ 1100 PRINTTAB(0,19) CHR$(132);CHR$(157);CHR$(131);"   Press <SPACE> to begin again.";
+ 1110 REPEAT UNTIL GET=32
+ 1120 CLEAR
+ 1130 GOTO70
+ 1140 ENDPROC
+ 1150 REM *****************************  
+ 1160 REM Y3+4, 101 words 
+ 1170 DATA accident, accidentally, actually, address, answer, appear, arrive
+ 1180 DATA believe, bicycle, breath, breathe, build, busy, business, calendar
+ 1190 DATA caught,  centre, century, certain, circle, complete, consider
+ 1200 DATA continue, decide, describe, different, difficult, disappear, early
+ 1210 DATA earth, eight, eighth, enough, exercise, experience, experiment
+ 1220 DATA extreme, famous, favourite, February, forward, forwards, fruit
+ 1230 DATA grammar, group, guard, guide, heard, heart, height, history, imagine
+ 1240 DATA increase, important, interest, island,  knowledge, learn, length
+ 1250 DATA library, material, medicine, mention, minute, natural, naughty
+ 1260 DATA notice, occasion, occasionally, often, opposite, ordinary
+ 1270 DATA particular, peculiar, perhaps, popular, position, possess
+ 1280 DATA possession, possible, potatoes, pressure, probably, promise, purpose
+ 1290 DATA quarter, question, recent, regular, reign, remember, sentence
+ 1300 DATA separate, special, straight, strange, strength, suppose, surprise
+ 1310 DATA woman, women
+ 1320 REM *** Y5+6, 105 words ***
+ 1330 DATA accommodate, accompany, according, achieve, aggressive
+ 1340 DATA amateur, ancient, apparent, appreciate, attached, available
+ 1350 DATA average, awkward, bargain, bruise, category, cemetery
+ 1360 DATA committee, communicate, community, competition, conscience
+ 1370 DATA conscious, controversy, convenience, correspond, criticise
+ 1380 DATA critic, curiosity, definite, desperate, determined, develop
+ 1390 DATA dictionary, disastrous, embarrass, environment, equip, equipped
+ 1400 DATA equipment, especially, exaggerate, excellent, existence, explanation
+ 1410 DATA familiar, foreign, forty, frequently, government, guarantee, harass
+ 1420 DATA hindrance, identity, immediate, immediately, individual, interfere
+ 1430 DATA interrupt, language, leisure, lightning, marvellous, mischievous
+ 1440 DATA muscle, necessary, neighbour, nuisance, occupy, occur, opportunity
+ 1450 DATA parliament, persuade, physical, prejudice, privilege, profession
+ 1460 DATA programme, pronunciation, queue, recognise, recommend, relevant
+ 1470 DATA restaurant, rhyme, rhythm, sacrifice, secretary, shoulder
+ 1480 DATA signature, sincere, sincerely, soldier, stomach, sufficient, suggest
+ 1490 DATA symbol, system, temperature, thorough, twelfth, variety, vegetable
+ 1500 DATA vehicle, yacht
